@@ -7,36 +7,52 @@
 //
 
 import Foundation
+import UIKit
 
 class MovieController {
     
+    static let sharedController = MovieController()
     
-    static let baseurl = NSURL(string: "http://api.themoviedb.org/3/movie")
+    static let baseURL = "https://api.themoviedb.org/3"
     
-    static let endpoint = baseurl?.URLByAppendingPathComponent("/id")
+    static let apiKey = "2749a8202386832b2662a9a43e718912"
     
-    let movie: [Movie] = []
+    static var movieSearchURLString = ""
     
-    func getMovie(completion: ((movies: [Movie]) -> Void)? = nil) {
-        
-        guard let url = MovieController.endpoint else {fatalError("URL optional is nil")
+    var url: NSURL?
+    static func searchForMovieWithSearchTerm(searchTerm: String, completion: (movies: [Movie]) -> Void) {
+        if let escapedSearchTerm = searchTerm.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet()) {
+            
+            print(escapedSearchTerm)
+            
+            movieSearchURLString = baseURL + "/search/movie/"
+            movieSearchURLString = movieSearchURLString + "?"
+            movieSearchURLString = movieSearchURLString + "api_key=" + apiKey
+            movieSearchURLString = movieSearchURLString + "&" + "query=" + escapedSearchTerm
+            print(movieSearchURLString)
         }
         
-        NetworkController.performRequestForURL(url, httpMethod: .Get) { (data, error) in
-            guard let data = data,
-                
-                jsonDictionary = (try? NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)) as? [[String:AnyObject]] else {
-                    if let completion = completion {
-                        completion (movies: [])
-                    }
-                    return
-            }
-            let moviesArray = jsonDictionary.flatMap {Movie(dictionary: $0
-                )}
-            if let completion = completion {
-                completion(movies: moviesArray)
-                return
+        
+        
+        if let url = NSURL(string: movieSearchURLString) {
+            NetworkController.performRequestForURL(url) { (data, error) in 
+                guard let data = data,
+                    jsonAnyObject = try? NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments),
+                    jsonDictionary = jsonAnyObject as? [String:AnyObject],
+                    moviesDictionary = jsonDictionary ["results"] as? [[String:AnyObject]]
+                    else {
+                        completion(movies: [])
+                        return }
+                let movies = moviesDictionary.flatMap{Movie(dictionary: $0)}
+                print(movies)
+                completion(movies: movies)
             }
         }
     }
 }
+
+
+
+
+
+

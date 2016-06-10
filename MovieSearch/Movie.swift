@@ -12,13 +12,13 @@ import UIKit
 class Movie {
     
     let title: String
-    let rating: Int
+    let rating: Double
     let overview: String
     let imageEndpoint: String
     
     init?(dictionary: [String:AnyObject]) {
         guard let title = dictionary ["title"] as? String,
-            rating = dictionary ["vote_average"] as? Int,
+            rating = dictionary ["vote_average"] as? Double,
             overview = dictionary ["overview"] as? String,
             imageEndpoint = dictionary ["poster_path"] as? String else {
                 return nil
