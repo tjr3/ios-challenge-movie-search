@@ -22,7 +22,7 @@
                             </connections>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="415" id="ZGR-fX-fwe" customClass="MovieTableViewCell" customModule="MovieSearch" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="movieCell" rowHeight="415" id="ZGR-fX-fwe" customClass="MovieTableViewCell" customModule="MovieSearch" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="72" width="600" height="415"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZGR-fX-fwe" id="qih-4L-opF">
@@ -33,11 +33,11 @@
                                             <rect key="frame" x="8" y="8" width="584" height="399"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aa8-4N-a1y">
-                                                    <rect key="frame" x="271" y="0.0" width="42" height="30"/>
+                                                    <rect key="frame" x="264" y="0.0" width="56" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="eJy-Ce-CJy"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -47,7 +47,7 @@
                                                         <constraint firstAttribute="height" constant="25" id="Mtj-pO-I8m"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="0.0" green="0.20000000000000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d6K-Ne-uTc">
@@ -56,7 +56,6 @@
                                                         <constraint firstAttribute="height" constant="90" id="JyR-nK-1fq"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k30-ui-wAD">
@@ -93,14 +92,13 @@
                 <searchDisplayController id="x7L-CN-BSg">
                     <connections>
                         <outlet property="delegate" destination="qAs-zz-xh2" id="iy1-1M-idu"/>
-                        <outlet property="searchBar" destination="ITx-MX-n8a" id="G6E-ni-Z33"/>
                         <outlet property="searchContentsController" destination="qAs-zz-xh2" id="XOI-ms-ghy"/>
                         <outlet property="searchResultsDataSource" destination="qAs-zz-xh2" id="6FC-NN-am1"/>
                         <outlet property="searchResultsDelegate" destination="qAs-zz-xh2" id="IDW-CJ-iak"/>
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="321" y="-9"/>
+            <point key="canvasLocation" x="415" y="-20"/>
         </scene>
     </scenes>
 </document>

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class MovieController {
     
@@ -22,15 +23,19 @@ class MovieController {
     var url: NSURL?
     static func searchForMovieBySearchTerm(searchTerm: String, completion: (movies: [Movie]) -> Void) {
         if let escapedSearchTerm = searchTerm.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet()) {
+            print(escapedSearchTerm)
             // Creating endpoing URL
             movieSearchURLString = baseURL + "/search/movie/"
             movieSearchURLString = movieSearchURLString + "?"
             movieSearchURLString = movieSearchURLString + "api_key=" + apiKey
             movieSearchURLString = movieSearchURLString + "&" + "query=" + escapedSearchTerm
+            
+            
+            print(movieSearchURLString)
         }
         
         if let url = NSURL(string: movieSearchURLString) {
-            NetworkController.performRequestForURL(url, completion: { (data, error) in
+            NetworkController.performRequestForURL(url) { (data, error) in
                 guard let data = data,
                     jsonAnyObject = try? NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments),
                     jsonDictionary = jsonAnyObject as? [String:AnyObject],
@@ -38,10 +43,11 @@ class MovieController {
                     else {
                         completion(movies: [])
                         return }
+                print(data)
                 let movies = moviesDictionary.flatMap{Movie(dicitonary: $0)}
                 print(movies)
                 completion(movies: movies)
-            })
+            }
         }
     }
 }

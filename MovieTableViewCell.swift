@@ -22,7 +22,7 @@ class MovieTableViewCell: UITableViewCell {
         print(movie.imageEndpoint)
         let imageURL = "http://image.tmdb.org/t/p/w500" + "\(movie.imageEndpoint)"
         ImageController.imageForURL(imageURL) { (image) in
-            if let image = image{
+            if let image = image {
                 self.movieImageView.image = image
             }
         }
